@@ -1,21 +1,17 @@
-//
-//  AppDelegate.swift
-//  Timings
-//
-//  Created by Josh Heald on 16/02/2018.
-//  Copyright © 2018 FanDuel. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var timerListViewController: TimerListViewController?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        timerListViewController = TimerListViewController(nibName: String(describing: TimerListViewController.self), bundle: .main)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = timerListViewController
+        window?.makeKeyAndVisible()
         return true
     }
 
