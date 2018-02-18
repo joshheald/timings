@@ -24,14 +24,11 @@ class TimerListViewController: UIViewController {
     private func setupTableView() {
         registerCells()
         presenter.tableItemStream.bind(to: timerListTableView.rx.items) { (tableView, row, element) in
-            if let cell = tableView.dequeueReusableCell(withIdentifier: element.reuseIdentifier) {
-                if let configurableCell = cell as? AddTimerCell {
-                    configurableCell.configureCell(tableItem: element)
-                }
-                return cell
-            } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: element.reuseIdentifier) else {
                 return UITableViewCell()
             }
+            (cell as? ConfigurableCell)?.configure(with: element)
+            return cell
             }
             .disposed(by: disposeBag)
     }
@@ -44,7 +41,7 @@ class TimerListViewController: UIViewController {
     }
 }
 
-protocol ConfigurableCell where Self : UITableViewCell {
-    func configureCell(tableItem: TableItem)
+protocol ConfigurableCell {
+    func configure(with tableItem: TableItem)
 }
 
