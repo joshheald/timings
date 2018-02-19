@@ -1,20 +1,20 @@
 import Foundation
 import RxSwift
+import RxCocoa
+import RxDataSources
 
 class TimerListPresenter {
     let eventProvider: TimerListEventProvider
     
     let disposeBag = DisposeBag()
     
-    private var tableItems: BehaviorSubject<[TableItem]>
-    let tableItemStream: Observable<[TableItem]>
+    let tableItems: BehaviorSubject<[SectionModel<String, TableItem>]>
     
     init(eventProvider: TimerListEventProvider) {
         self.eventProvider = eventProvider
         tableItems = BehaviorSubject(value: [])
-        tableItemStream = tableItems.asObserver()
         eventProvider.viewDidLoad.subscribe(onNext: { [weak self] in
-            self?.tableItems.onNext([TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+            self?.tableItems.onNext([SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])])
         }).disposed(by: disposeBag)
     }
     

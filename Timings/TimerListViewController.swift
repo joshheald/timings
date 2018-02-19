@@ -1,6 +1,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
 class TimerListViewController: UIViewController {
     
@@ -15,6 +16,19 @@ class TimerListViewController: UIViewController {
     
     @IBOutlet weak var timerListTableView: UITableView!
     
+    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TableItem>>(
+        configureCell: { (_, tableview, indexPath, element) in
+            if let cell = tableview.dequeueReusableCell(withIdentifier: element.reuseIdentifier) {
+                (cell as? ConfigurableCell)?.configure(with: element)
+                return cell
+            }
+            return UITableViewCell()
+    },
+        titleForHeaderInSection: { dataSource, sectionIndex in
+            return dataSource[sectionIndex].model
+    }
+    )
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -23,14 +37,7 @@ class TimerListViewController: UIViewController {
 
     private func setupTableView() {
         registerCells()
-        presenter.tableItemStream.bind(to: timerListTableView.rx.items) { (tableView, row, element) in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: element.reuseIdentifier) else {
-                return UITableViewCell()
-            }
-            (cell as? ConfigurableCell)?.configure(with: element)
-            return cell
-            }
-            .disposed(by: disposeBag)
+        presenter.tableItems.bind(to: timerListTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
     }
     
     private func registerCells() {
@@ -38,6 +45,14 @@ class TimerListViewController: UIViewController {
             UINib(nibName: String(describing: AddTimerCell.self),
                   bundle: .main),
             forCellReuseIdentifier: AddTimerCell.reuseIdentifier)
+    }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
     }
 }
 

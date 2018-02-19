@@ -8,7 +8,8 @@ target 'Timings' do
 # Pods for Timings
   pod 'RxSwift'
   pod 'RxCocoa'
-
+  pod 'RxDataSources'
+  
   target 'TimingsTests' do
     inherit! :search_paths
     # Pods for testing
