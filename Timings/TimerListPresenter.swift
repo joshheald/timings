@@ -8,15 +8,19 @@ class TimerListPresenter {
     
     let disposeBag = DisposeBag()
     
-    let tableItems: BehaviorSubject<[SectionModel<String, TableItem>]>
+    private var timersSection: Observable<SectionModel<String, TableItem>>
+    private var addTimerSection = SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+    var tableItems: Observable<[SectionModel<String, TableItem>]>?
     
     init(eventProvider: TimerListEventProvider) {
         self.eventProvider = eventProvider
-        tableItems = BehaviorSubject(value: [])
-        eventProvider.viewDidLoad.subscribe(onNext: { [weak self] in
-            self?.tableItems.onNext([SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])])
-        }).disposed(by: disposeBag)
+        timersSection = eventProvider.addTimerTapped.scan(SectionModel<String, TableItem>(model: "Timers", items: []), accumulator: { (oldValue, _) in
+            var newSection = oldValue
+            newSection.items.append(TableItem(reuseIdentifier: "TimerCell", title: "Totes a timer"))
+            return newSection
+        })
+        tableItems = timersSection.flatMap({ (timerSection) -> Observable<[SectionModel<String, TableItem>]> in
+            return Observable.of([timerSection, self.addTimerSection])
+        })
     }
-    
-    
 }

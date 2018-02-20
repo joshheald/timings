@@ -7,8 +7,10 @@ class TimerListViewController: UIViewController {
     
     let disposeBag = DisposeBag()
     let viewDidLoadStream = PublishSubject<Void>()
+    let addTimerTappedStream = PublishSubject<Void>()
     private lazy var eventProvider: TimerListEventProvider = {
-        TimerListEventProvider(viewDidLoad: viewDidLoadStream.asObserver())
+        TimerListEventProvider(viewDidLoad: viewDidLoadStream.asObserver(),
+                               addTimerTapped: addTimerTappedStream.asObserver())
     }()
     private lazy var presenter: TimerListPresenter = {
         return TimerListPresenter(eventProvider: eventProvider)
@@ -36,8 +38,22 @@ class TimerListViewController: UIViewController {
     }
 
     private func setupTableView() {
+        let dataSource = self.dataSource
         registerCells()
-        presenter.tableItems.bind(to: timerListTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        presenter.tableItems?.bind(to: timerListTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        timerListTableView.rx
+            .itemSelected
+            .map { indexPath in
+                return (indexPath, dataSource[indexPath])
+            }
+            .filter({ (_, tableItem) -> Bool in
+                return tableItem.reuseIdentifier == AddTimerCell.reuseIdentifier
+            })
+            .subscribe(onNext: { [weak self] pair in
+                self?.addTimerTappedStream.onNext(())
+            })
+            .disposed(by: disposeBag)
+
     }
     
     private func registerCells() {
@@ -45,6 +61,7 @@ class TimerListViewController: UIViewController {
             UINib(nibName: String(describing: AddTimerCell.self),
                   bundle: .main),
             forCellReuseIdentifier: AddTimerCell.reuseIdentifier)
+        timerListTableView.register(TimerCell.self, forCellReuseIdentifier: TimerCell.reuseIdentifier)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -58,5 +75,9 @@ class TimerListViewController: UIViewController {
 
 protocol ConfigurableCell {
     func configure(with tableItem: TableItem)
+}
+
+extension ConfigurableCell where Self: UITableViewCell {
+    static var reuseIdentifier: String { return String(describing: Self.self) }
 }
 
