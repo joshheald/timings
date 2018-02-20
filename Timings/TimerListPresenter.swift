@@ -1,7 +1,22 @@
 import Foundation
 import RxSwift
 import RxCocoa
-import RxDataSources
+
+struct SectionViewModel<Section: Equatable, ItemType: Equatable> : Equatable {
+    
+    var model: Section
+    var items: [ItemType]
+    
+    init(model: Section, items: [ItemType]) {
+        self.model = model
+        self.items = items
+    }
+    
+    static func ==(lhs: SectionViewModel<Section, ItemType>, rhs: SectionViewModel<Section, ItemType>) -> Bool {
+        return lhs.model == rhs.model
+        && lhs.items == rhs.items
+    }
+}
 
 class TimerListPresenter {
     let eventProvider: TimerListEventProvider
@@ -9,9 +24,9 @@ class TimerListPresenter {
     let disposeBag = DisposeBag()
     
     private var timersItems: Observable<[TableItem]>
-    private var timersSection: Observable<SectionModel<String, TableItem>>
-    private var addTimerSection: Observable<SectionModel<String, TableItem>>
-    var tableItems: Observable<[SectionModel<String, TableItem>]>?
+    private var timersSection: Observable<SectionViewModel<String, TableItem>>
+    private var addTimerSection: Observable<SectionViewModel<String, TableItem>>
+    var tableItems: Observable<[SectionViewModel<String, TableItem>]>
     
     init(eventProvider: TimerListEventProvider) {
         self.eventProvider = eventProvider
@@ -26,14 +41,14 @@ class TimerListPresenter {
             .debug("timers rows")
         
         addTimerSection = eventProvider.viewDidLoad
-            .map({ (_) -> SectionModel<String, TableItem> in
-                return SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+            .map({ (_) -> SectionViewModel<String, TableItem> in
+                return SectionViewModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
             })
             .debug("add timer")
         
         timersSection = timersItems
-            .map({ (items) -> SectionModel<String, TableItem> in
-                return SectionModel(model: "Timers", items: items)
+            .map({ (items) -> SectionViewModel<String, TableItem> in
+                return SectionViewModel(model: "Timers", items: items)
             })
             .debug("timers section")
         

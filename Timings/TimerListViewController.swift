@@ -40,7 +40,12 @@ class TimerListViewController: UIViewController {
     private func setupTableView() {
         let dataSource = self.dataSource
         registerCells()
-        presenter.tableItems?.bind(to: timerListTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        presenter.tableItems
+            .map({ sectionViewModels -> [SectionModel<String, TableItem>] in
+                return sectionViewModels.map { return SectionModel(model: $0.model, items: $0.items) }
+            })
+            .bind(to: timerListTableView.rx.items(dataSource: dataSource)).disposed(by: disposeBag)
+        
         timerListTableView.rx
             .itemSelected
             .map { indexPath in

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		033E8720203B89D7006896DD /* TimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033E871F203B89D7006896DD /* TimerCell.swift */; };
+		033E8724203CBE1F006896DD /* TestableObserver+Asserting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033E8723203CBE1F006896DD /* TestableObserver+Asserting.swift */; };
+		033E8726203CBE65006896DD /* TestScheduler+Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 033E8725203CBE65006896DD /* TestScheduler+Observer.swift */; };
 		206497C1203725BF00A266AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497C0203725BF00A266AD /* AppDelegate.swift */; };
 		206497C3203725BF00A266AD /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497C2203725BF00A266AD /* TimerListViewController.swift */; };
 		206497C8203725BF00A266AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206497C7203725BF00A266AD /* Assets.xcassets */; };
@@ -36,6 +38,8 @@
 
 /* Begin PBXFileReference section */
 		033E871F203B89D7006896DD /* TimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerCell.swift; sourceTree = "<group>"; };
+		033E8723203CBE1F006896DD /* TestableObserver+Asserting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestableObserver+Asserting.swift"; sourceTree = "<group>"; };
+		033E8725203CBE65006896DD /* TestScheduler+Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TestScheduler+Observer.swift"; sourceTree = "<group>"; };
 		206497BD203725BF00A266AD /* Timings.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Timings.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		206497C0203725BF00A266AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		206497C2203725BF00A266AD /* TimerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListViewController.swift; sourceTree = "<group>"; };
@@ -125,6 +129,8 @@
 			children = (
 				206497D5203725BF00A266AD /* TimingsTests.swift */,
 				206497D7203725BF00A266AD /* Info.plist */,
+				033E8723203CBE1F006896DD /* TestableObserver+Asserting.swift */,
+				033E8725203CBE65006896DD /* TestScheduler+Observer.swift */,
 			);
 			path = TimingsTests;
 			sourceTree = "<group>";
@@ -387,6 +393,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				033E8724203CBE1F006896DD /* TestableObserver+Asserting.swift in Sources */,
+				033E8726203CBE65006896DD /* TestScheduler+Observer.swift in Sources */,
 				206497D6203725BF00A266AD /* TimingsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
