@@ -31,6 +31,6 @@ class TimerListPresenter {
             return SectionModel(model: "Timers", items: items)
         }).debug("timers section")
         
-        tableItems = Observable.combineLatest([addTimerSection, timersSection]).debug("merged items")
+        tableItems = Observable.combineLatest([timersSection, addTimerSection]).debug("merged items")
     }
 }
