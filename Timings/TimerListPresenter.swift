@@ -10,7 +10,7 @@ class TimerListPresenter {
     
     private var timersItems: Observable<[TableItem]>
     private var timersSection: Observable<SectionModel<String, TableItem>>
-    private var addTimerSection = Observable.just(SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")]))
+    private var addTimerSection: Observable<SectionModel<String, TableItem>>
     var tableItems: Observable<[SectionModel<String, TableItem>]>?
     
     init(eventProvider: TimerListEventProvider) {
@@ -20,12 +20,17 @@ class TimerListPresenter {
             var newItems = oldValue
             newItems.append(TableItem(reuseIdentifier: "TimerCell", title: "Totes a timer"))
             return newItems
-        })
+        }).startWith([])
+            .debug("timers rows")
+        
+        addTimerSection = eventProvider.viewDidLoad.map({ (_) -> SectionModel<String, TableItem> in
+            return SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+        }).debug("add timer")
         
         timersSection = timersItems.map({ (items) -> SectionModel<String, TableItem> in
             return SectionModel(model: "Timers", items: items)
-        })
+        }).debug("timers section")
         
-        tableItems = Observable.combineLatest([addTimerSection, timersSection])
+        tableItems = Observable.combineLatest([addTimerSection, timersSection]).debug("merged items")
     }
 }
