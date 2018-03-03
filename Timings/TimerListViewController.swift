@@ -5,7 +5,7 @@ import RxDataSources
 
 protocol EquatableSectionModelType: SectionModelType, Equatable where Item: Equatable {}
 
-struct EquatableSectionModel<Section:Equatable, Item:Equatable>: EquatableSectionModelType {
+struct EquatableSectionModel<Section:Equatable, ItemType:Equatable> {
     public var model: Section
     public var items: [Item]
     
@@ -22,6 +22,16 @@ struct EquatableSectionModel<Section:Equatable, Item:Equatable>: EquatableSectio
     static func ==(lhs: EquatableSectionModel, rhs: EquatableSectionModel) -> Bool {
         return lhs.model == rhs.model &&
         lhs.items == rhs.items
+    }
+}
+
+extension EquatableSectionModel
+: EquatableSectionModelType {
+    public typealias Identity = Section
+    public typealias Item = ItemType
+    
+    public var identity: Section {
+        return model
     }
 }
 

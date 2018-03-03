@@ -9,9 +9,9 @@ class TimerListPresenter {
     let disposeBag = DisposeBag()
     
     private var timersItems: Observable<[TableItem]>
-    private var timersSection: Observable<SectionModel<String, TableItem>>
-    private var addTimerSection: Observable<SectionModel<String, TableItem>>
-    var tableItems: Observable<[SectionModel<String, TableItem>]>?
+    private var timersSection: Observable<EquatableSectionModel<String, TableItem>>
+    private var addTimerSection: Observable<EquatableSectionModel<String, TableItem>>
+    var tableItems: Observable<[EquatableSectionModel<String, TableItem>]>?
     
     init(eventProvider: TimerListEventProvider) {
         self.eventProvider = eventProvider
@@ -26,14 +26,14 @@ class TimerListPresenter {
             .debug("timers rows")
         
         addTimerSection = eventProvider.viewDidLoad
-            .map({ (_) -> SectionModel<String, TableItem> in
-                return SectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+            .map({ (_) -> EquatableSectionModel<String, TableItem> in
+                return EquatableSectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
             })
             .debug("add timer")
         
         timersSection = timersItems
-            .map({ (items) -> SectionModel<String, TableItem> in
-                return SectionModel(model: "Timers", items: items)
+            .map({ (items) -> EquatableSectionModel<String, TableItem> in
+                return EquatableSectionModel(model: "Timers", items: items)
             })
             .debug("timers section")
         
