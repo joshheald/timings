@@ -3,6 +3,28 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 
+protocol EquatableSectionModelType: SectionModelType, Equatable where Item: Equatable {}
+
+struct EquatableSectionModel<Section:Equatable, Item:Equatable>: EquatableSectionModelType {
+    public var model: Section
+    public var items: [Item]
+    
+    public init(model: Section, items: [Item]) {
+        self.model = model
+        self.items = items
+    }
+    
+    init(original: EquatableSectionModel<Section, Item>, items: [Item]) {
+        self.model = original.model
+        self.items = items
+    }
+    
+    static func ==(lhs: EquatableSectionModel, rhs: EquatableSectionModel) -> Bool {
+        return lhs.model == rhs.model &&
+        lhs.items == rhs.items
+    }
+}
+
 class TimerListViewController: UIViewController {
     
     let disposeBag = DisposeBag()
@@ -18,7 +40,7 @@ class TimerListViewController: UIViewController {
     
     @IBOutlet weak var timerListTableView: UITableView!
     
-    let dataSource = RxTableViewSectionedReloadDataSource<SectionModel<String, TableItem>>(
+    let dataSource = RxTableViewSectionedReloadDataSource<EquatableSectionModel<String, TableItem>>(
         configureCell: { (_, tableview, indexPath, element) in
             if let cell = tableview.dequeueReusableCell(withIdentifier: element.reuseIdentifier) {
                 (cell as? ConfigurableCell)?.configure(with: element)
