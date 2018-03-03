@@ -4,7 +4,7 @@ import RxCocoa
 import RxDataSources
 
 class TimerListPresenter {
-    let eventProvider: TimerListEventProvider
+    let eventProvider: TimerListEventProviding
     
     let disposeBag = DisposeBag()
     
@@ -13,7 +13,7 @@ class TimerListPresenter {
     private var addTimerSection: Observable<EquatableSectionModel<String, TableItem>>
     var tableItems: Observable<[EquatableSectionModel<String, TableItem>]>?
     
-    init(eventProvider: TimerListEventProvider) {
+    init(eventProvider: TimerListEventProviding) {
         self.eventProvider = eventProvider
         
         timersItems = eventProvider.addTimerTapped

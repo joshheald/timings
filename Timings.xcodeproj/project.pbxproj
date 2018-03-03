@@ -12,7 +12,7 @@
 		206497C3203725BF00A266AD /* TimerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497C2203725BF00A266AD /* TimerListViewController.swift */; };
 		206497C8203725BF00A266AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 206497C7203725BF00A266AD /* Assets.xcassets */; };
 		206497CB203725BF00A266AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 206497C9203725BF00A266AD /* LaunchScreen.storyboard */; };
-		206497D6203725BF00A266AD /* TimingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497D5203725BF00A266AD /* TimingsTests.swift */; };
+		206497D6203725BF00A266AD /* TimingsListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497D5203725BF00A266AD /* TimingsListPresenterTests.swift */; };
 		206497F72037647C00A266AD /* TimerListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 206497F62037647C00A266AD /* TimerListViewController.xib */; };
 		206497F92037653900A266AD /* TimerListEventProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497F82037653900A266AD /* TimerListEventProvider.swift */; };
 		206497FB203765EB00A266AD /* TimerListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 206497FA203765EB00A266AD /* TimerListPresenter.swift */; };
@@ -20,6 +20,9 @@
 		207653C6203821D1009C82C6 /* AddTimerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207653C5203821D1009C82C6 /* AddTimerCell.swift */; };
 		207653C82038241D009C82C6 /* ContentViewLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 207653C72038241D009C82C6 /* ContentViewLoadable.swift */; };
 		207653CA203824CE009C82C6 /* AddTimerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 207653C9203824CE009C82C6 /* AddTimerCell.xib */; };
+		2090E854204AE6B100CA8DD9 /* EquatableSectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2090E853204AE6B100CA8DD9 /* EquatableSectionModel.swift */; };
+		2090E856204B412200CA8DD9 /* Event+EquatableArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2090E855204B412200CA8DD9 /* Event+EquatableArrays.swift */; };
+		2090E858204B41EE00CA8DD9 /* Recorded+EquatableArrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2090E857204B41EE00CA8DD9 /* Recorded+EquatableArrays.swift */; };
 		53AF5EDD1C4F14CFC7172451 /* Pods_Timings.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6AD9F15AC4CB2C3AF0B0B18 /* Pods_Timings.framework */; };
 		89E36EC8FF0E3B3DFEB12860 /* Pods_TimingsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EDEF0B0963B36A5DFD8E0E /* Pods_TimingsTests.framework */; };
 /* End PBXBuildFile section */
@@ -43,7 +46,7 @@
 		206497CA203725BF00A266AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		206497CC203725BF00A266AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206497D1203725BF00A266AD /* TimingsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TimingsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		206497D5203725BF00A266AD /* TimingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingsTests.swift; sourceTree = "<group>"; };
+		206497D5203725BF00A266AD /* TimingsListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimingsListPresenterTests.swift; sourceTree = "<group>"; };
 		206497D7203725BF00A266AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		206497F62037647C00A266AD /* TimerListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimerListViewController.xib; sourceTree = "<group>"; };
 		206497F82037653900A266AD /* TimerListEventProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerListEventProvider.swift; sourceTree = "<group>"; };
@@ -52,6 +55,9 @@
 		207653C5203821D1009C82C6 /* AddTimerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTimerCell.swift; sourceTree = "<group>"; };
 		207653C72038241D009C82C6 /* ContentViewLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewLoadable.swift; sourceTree = "<group>"; };
 		207653C9203824CE009C82C6 /* AddTimerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddTimerCell.xib; sourceTree = "<group>"; };
+		2090E853204AE6B100CA8DD9 /* EquatableSectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableSectionModel.swift; sourceTree = "<group>"; };
+		2090E855204B412200CA8DD9 /* Event+EquatableArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Event+EquatableArrays.swift"; sourceTree = "<group>"; };
+		2090E857204B41EE00CA8DD9 /* Recorded+EquatableArrays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Recorded+EquatableArrays.swift"; sourceTree = "<group>"; };
 		4C3D759585BF61C87EFD9D6A /* Pods-Timings.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timings.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Timings/Pods-Timings.debug.xcconfig"; sourceTree = "<group>"; };
 		59EDEF0B0963B36A5DFD8E0E /* Pods_TimingsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TimingsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9563B616A7C5AB871A89FEFA /* Pods-Timings.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Timings.release.xcconfig"; path = "Pods/Target Support Files/Pods-Timings/Pods-Timings.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,6 +122,7 @@
 				207653C5203821D1009C82C6 /* AddTimerCell.swift */,
 				207653C9203824CE009C82C6 /* AddTimerCell.xib */,
 				207653C72038241D009C82C6 /* ContentViewLoadable.swift */,
+				2090E853204AE6B100CA8DD9 /* EquatableSectionModel.swift */,
 			);
 			path = Timings;
 			sourceTree = "<group>";
@@ -123,8 +130,10 @@
 		206497D4203725BF00A266AD /* TimingsTests */ = {
 			isa = PBXGroup;
 			children = (
-				206497D5203725BF00A266AD /* TimingsTests.swift */,
+				206497D5203725BF00A266AD /* TimingsListPresenterTests.swift */,
 				206497D7203725BF00A266AD /* Info.plist */,
+				2090E855204B412200CA8DD9 /* Event+EquatableArrays.swift */,
+				2090E857204B41EE00CA8DD9 /* Recorded+EquatableArrays.swift */,
 			);
 			path = TimingsTests;
 			sourceTree = "<group>";
@@ -376,6 +385,7 @@
 				206497FB203765EB00A266AD /* TimerListPresenter.swift in Sources */,
 				207653C82038241D009C82C6 /* ContentViewLoadable.swift in Sources */,
 				033E8720203B89D7006896DD /* TimerCell.swift in Sources */,
+				2090E854204AE6B100CA8DD9 /* EquatableSectionModel.swift in Sources */,
 				206497C3203725BF00A266AD /* TimerListViewController.swift in Sources */,
 				207653C6203821D1009C82C6 /* AddTimerCell.swift in Sources */,
 				206497C1203725BF00A266AD /* AppDelegate.swift in Sources */,
@@ -387,7 +397,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				206497D6203725BF00A266AD /* TimingsTests.swift in Sources */,
+				206497D6203725BF00A266AD /* TimingsListPresenterTests.swift in Sources */,
+				2090E858204B41EE00CA8DD9 /* Recorded+EquatableArrays.swift in Sources */,
+				2090E856204B412200CA8DD9 /* Event+EquatableArrays.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
