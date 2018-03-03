@@ -32,6 +32,22 @@ class TimingsListPresenterTests: XCTestCase {
         XCTAssert(results.events.first! == expected)
     }
     
+    func test_addTimerTapped_NoTimersToStartWith_AddsATimerToTheTable() {
+        let addTimerTapped = scheduler.createHotObservable([next(100, ())])
+        let results = scheduler.createObserver(([EquatableSectionModel<String, TableItem>]).self)
+        mockEventProvider = MockTimerListEventProvider(viewDidLoad: Observable.just(()), addTimerTapped: addTimerTapped.asObservable())
+        sut = TimerListPresenter(eventProvider: mockEventProvider)
+        scheduler.scheduleAt(0) { [unowned self] in
+            self.sut.tableItems?.subscribe(results).disposed(by: self.disposeBag)
+        }
+        scheduler.start()
+        let expected = next(100, [
+            EquatableSectionModel(model: "Timers", items: [TableItem(reuseIdentifier: "TimerCell", title: "Totes a timer")]),
+            EquatableSectionModel(model: "", items: [TableItem(reuseIdentifier: "AddTimerCell", title: "Add timer")])
+            ])
+        XCTAssert(results.events.last! == expected)
+    }
+    
 }
 
 struct MockTimerListEventProvider: TimerListEventProviding {
